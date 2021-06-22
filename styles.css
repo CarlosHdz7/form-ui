@@ -78,9 +78,14 @@ body{
     display: block;
     width: 100%;
     box-sizing: border-box;
-    padding:5px;
+    padding:10px;
     border: 1px solid var(--gray2);
     margin-bottom: 10px;
+}
+
+.button-container{
+    display: flex;
+    justify-content: end;
 }
 
 .button{
@@ -88,4 +93,24 @@ body{
     padding: 10px 20px;
     background:var(--black);
     color:var(--white);
+}
+
+.button{
+    cursor:pointer;
+}
+
+.input::-webkit-input-placeholder {
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.input:-ms-input-placeholder {
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.input:-moz-placeholder {
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.input::-moz-placeholder {
+    font-family: 'Montserrat Alternates', sans-serif;
 }
