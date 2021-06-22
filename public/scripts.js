@@ -2,8 +2,10 @@ window.addEventListener('load', (event) => {
 
     //Variables
     let flagKonamiCode = false;
+    var keys = {37: 1, 38: 1, 39: 1, 40: 1, 33: 1, 34: 1,32: 1};
 
     //Regexs
+    const isLetterOrNumber = new RegExp(/^[a-zA-Z0-9]{1}$/);
     const isValidName = new RegExp(/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/); 
     const onlyNumbers = new RegExp(/^[0-9]*$/);
     const isPhoneNumber = new RegExp(/^[0-9]{4}-[0-9]{4}$/);
@@ -35,6 +37,7 @@ window.addEventListener('load', (event) => {
     const MSGTerms = document.getElementById('MSGTerms');
 
     const codeContainer = document.getElementById('codeContainer');
+    const backgroundShadow = document.getElementById('backgroundShadow');
 
     //Settings
     FRMSignIn.reset();
@@ -49,16 +52,22 @@ window.addEventListener('load', (event) => {
         SPNExperience.textContent = e.target.value;
     })
 
-    document.addEventListener('keyup',(e)=>{
-        e.preventDefault();
+    document.addEventListener('keydown',(e)=>{
+        if (keys[e.keyCode]) {
+            e.preventDefault(e);
+        }
+
         console.log(e);
 
         if(!flagKonamiCode){
             if(e.key == "ArrowUp"){
+                document.activeElement.blur()
                 createContainer(e);
                 flagKonamiCode = true;
+                backgroundShadow.classList.remove('d-none');
             }
         }else{
+            document.activeElement.blur()
             createContainer(e);
         }
 
@@ -244,28 +253,35 @@ window.addEventListener('load', (event) => {
 
     const createContainer = (e) =>{
 
+    
         switch (e.key) {
             case "ArrowUp":{
                 createArrow("up");
-             break;
+                break;
             }
             
             case "ArrowDown":{
                 createArrow("down");
-            break;
+                break;
             }
 
             case "ArrowLeft":{
                 createArrow("left");
-            break;
+                break;
             }
 
             case "ArrowRight":{
                 createArrow("right");
-            break;
+                break;
+            }
+
+            case "Escape":{
+                clearCode();
+                break;
             }
         
             default:
+                if(!isLetterOrNumber.test(e.key)) break;
                 createLetterOrNumber(e.key);
                 break;
         }
@@ -287,6 +303,12 @@ window.addEventListener('load', (event) => {
         div.classList.add("button-code-letter");
         div.innerHTML = digit;
         codeContainer.appendChild(div);
+    }
+
+    const clearCode = () => {
+        flagKonamiCode = false;
+        backgroundShadow.classList.add('d-none');
+        while(codeContainer.firstChild) codeContainer.removeChild(codeContainer.firstChild);
     }
 
     //Utilities
