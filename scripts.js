@@ -39,15 +39,34 @@ window.addEventListener('load', (event) => {
 
     //[Functions]
     const validateForm = () => {
-        validateName();
-        validateLastName();
-        validateAge();
-        validatePhone();
-        validateWebSite();
-        validateEmail();
-        validatePassword1();
-        validatePassword2();
-        agreeTerms();
+        let errors = [];
+
+        errors.push(validateName());
+        errors.push(validateLastName());
+        errors.push(validateAge());
+        errors.push(validatePhone());
+        errors.push(validateWebSite());
+        errors.push(validateEmail());
+        errors.push(validatePassword1());
+        errors.push(validatePassword2());
+        errors.push(agreeTerms());
+
+        console.clear();
+
+        if(errors.includes(false)){
+            console.log("%c 🚨 Invalid submit","color:red");
+        }else{
+            console.log("%c ✅ Successfull submit","color:green");
+            console.table({
+                "Name":TXTName.value,
+                "Last Name":TXTLastname.value,
+                "Age": TXTAge.value,
+                "Phone": TXTPhone.value,
+                "Website": TXTWebsite.value,
+                "Email": TXTEmail.value,
+                "Password": TXTPassword.value
+            });
+        }
     }
 
     const validateName = () => {
@@ -85,6 +104,11 @@ window.addEventListener('load', (event) => {
 
         if(isEmptyString(TXTAge.value)){
             showWarning(TXTAge,MSGAge,"You must provide an age");
+            return false;
+        }
+
+        if(!(TXTAge.value >= 18 && TXTAge.value <= 40)){
+            showWarning(TXTAge,MSGAge,"Age has to be between 18 and 40");
             return false;
         }
 
@@ -160,7 +184,7 @@ window.addEventListener('load', (event) => {
         }
 
         if(TXTPassword.value !== TXTRepeatPassword.value){
-            showWarning(TXTRepeatPassword,MSGRepeatPassword,"Passwords doesn't match");
+            showWarning(TXTRepeatPassword,MSGRepeatPassword,"Password doesn't match");
             return false;
         }
         clearWarning(TXTRepeatPassword,MSGRepeatPassword);
