@@ -112,6 +112,14 @@ body{
     text-decoration: none;
 }
 
+:-moz-focusring {
+    outline: 2px solid var(--gray);
+}
+
+.invalid-input{
+    outline: 2px solid var(--orange);
+}
+
 .input::-webkit-input-placeholder {
     font-family: 'Montserrat Alternates', sans-serif;
 }
