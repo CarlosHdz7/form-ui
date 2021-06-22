@@ -3,7 +3,8 @@
     --gray:#7f8c8d;
     --gray2:#dfe4ea;
     --black:#000;
-    --radius:8px;
+    --orange:#FF240E;
+    --radius:10px;
 }
 
 *{
@@ -30,7 +31,7 @@ body{
 }
 
 .form{
-    padding:15px;
+    padding:20px;
     width: 100%;
     height: auto;
     background-color:var(--white);
@@ -86,17 +87,29 @@ body{
 .button-container{
     display: flex;
     justify-content: end;
+    margin-top: 10px;
 }
 
 .button{
     border: none;
     padding: 10px 20px;
-    background:var(--black);
+    background:var(--orange);
     color:var(--white);
 }
 
 .button{
     cursor:pointer;
+    border-radius: 5px;
+}
+
+.terms-container{
+    font-size:10px;
+}
+
+.terms{
+    color: var(--orange);
+    font-weight: 700;
+    text-decoration: none;
 }
 
 .input::-webkit-input-placeholder {
