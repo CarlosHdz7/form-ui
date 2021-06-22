@@ -1,6 +1,6 @@
 window.addEventListener('load', (event) => {
 
-    //Regex
+    //Regexs
     const isValidName = new RegExp(/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/); 
     const onlyNumbers = new RegExp(/^[0-9]*$/);
     const isPhoneNumber = new RegExp(/^[0-9]{4}-[0-9]{4}$/);
@@ -8,18 +8,19 @@ window.addEventListener('load', (event) => {
     const isvalidUrl = new RegExp(/^http[s]?:\/\/[\w]+([\.]+[\w]+)+$/);
 
     //[Objects]
+    const FRMSignIn = document.getElementById('FRMSignIn');
     const TXTName = document.getElementById('TXTName');
     const TXTLastname = document.getElementById('TXTLastname');
     const TXTAge = document.getElementById('TXTAge');
     const TXTPhone = document.getElementById('TXTPhone');
     const TXTWebsite = document.getElementById('TXTWebsite');
     const RNGExpecience = document.getElementById('RNGExpecience');
+    const SPNExperience = document.getElementById('SPNExperience');
     const TXTEmail = document.getElementById('TXTEmail');
     const TXTPassword = document.getElementById('TXTPassword');
     const TXTRepeatPassword = document.getElementById('TXTRepeatPassword');
     const CHKTerms = document.getElementById('CHKTerms');
     const BTNSignin = document.getElementById('BTNSignin');
-
     const MSGName = document.getElementById('MSGName');
     const MSGLastname = document.getElementById('MSGLastname');
     const MSGAge = document.getElementById('MSGAge');
@@ -30,11 +31,18 @@ window.addEventListener('load', (event) => {
     const MSGRepeatPassword = document.getElementById('MSGRepeatPassword');
     const MSGTerms = document.getElementById('MSGTerms');
 
+    //Settings
+    FRMSignIn.reset();
+
     //[Events]
     BTNSignin.addEventListener('click',(e)=>{
         e.preventDefault();
         validateForm();
     });
+
+    RNGExpecience.addEventListener('change',(e) =>{
+        SPNExperience.textContent = e.target.value;
+    })
 
 
     //[Functions]
@@ -50,23 +58,15 @@ window.addEventListener('load', (event) => {
         errors.push(validatePassword1());
         errors.push(validatePassword2());
         errors.push(agreeTerms());
-
         console.clear();
 
         if(errors.includes(false)){
             console.log("%c 🚨 Invalid submit","color:red");
-        }else{
-            console.log("%c ✅ Successfull submit","color:green");
-            console.table({
-                "Name":TXTName.value,
-                "Last Name":TXTLastname.value,
-                "Age": TXTAge.value,
-                "Phone": TXTPhone.value,
-                "Website": TXTWebsite.value,
-                "Email": TXTEmail.value,
-                "Password": TXTPassword.value
-            });
+            return;
         }
+
+        showSubmittedData();
+        
     }
 
     const validateName = () => {
@@ -173,6 +173,11 @@ window.addEventListener('load', (event) => {
             return false;
         }
 
+        if(TXTPassword.value.length < 6){
+            showWarning(TXTPassword,MSGPassword,"You must have at least 6 digits");
+            return false;
+        }
+
         clearWarning(TXTPassword,MSGPassword);
         return true;
     }
@@ -203,6 +208,19 @@ window.addEventListener('load', (event) => {
         return true;
     }
 
+    const showSubmittedData = () =>{
+        console.log("%c ✅ Successfull submit","color:green");
+        console.table({
+            "Name":TXTName.value,
+            "Last Name":TXTLastname.value,
+            "Age": TXTAge.value,
+            "Phone": TXTPhone.value,
+            "Website": TXTWebsite.value,
+            "Email": TXTEmail.value,
+            "Password": TXTPassword.value,
+            "Year's experience": RNGExpecience.value
+        });
+    }
     //Utilities
     const isEmptyString = text => (text == "") ? true : false;
     

@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <form class="form" action="#">
+        <form class="form" action="#" id="FRMSignIn">
             <h2 class="title text-center">Welcome aboard</h2>
             <p class="sub-title text-center text-bold">Create account to getting started</p>
             <hr>
@@ -45,8 +45,11 @@
                         <small id="MSGWebsite" class="input-container__message d-none"></small>
                     </div>
                     <div class="input-container">
-                        <label class="input-label" for="RNGExpecience">Experience</label>
-                        <input type="range" min="1" max="100" value="50" class="slider" id="RNGExpecience">
+                        <label class="input-label" for="RNGExpecience">Experience (Years)</label>
+                        <div class="range-container">
+                            <input type="range" min="1" max="5" value="1" class="slider" id="RNGExpecience">
+                            <span class="range-years" id="SPNExperience">1</span>
+                        </div>
                     </div>
                 </div>
                 <div class="grid__rigth">
