@@ -154,3 +154,24 @@ body{
 .input::-moz-placeholder {
     font-family: 'Montserrat Alternates', sans-serif;
 }
+
+@media (max-width: 800px) {
+
+    body{
+        padding: 20px 20px 10px 20px;
+        box-sizing:border-box;  /** add this **/
+        -moz-box-sizing:border-box; /** add this **/
+        -webkit-box-sizing:border-box; /** add this **/
+        -ms-box-sizing:border-box; /** add this **/
+    }
+
+    .grid{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .container{
+        height:auto;
+        margin-bottom:20px ;
+    }
+}
