@@ -59,12 +59,20 @@ body{
 }
 
 /*Utilities*/
+.d-none{
+    display: none;
+}
+
 .text-center{
     text-align: center;
 }
 
 .text-bold{
     font-weight: 700;
+}
+
+.input-container{
+    margin-bottom: 10px;
 }
 
 .input-label{
@@ -81,7 +89,11 @@ body{
     box-sizing: border-box;
     padding:10px;
     border: 1px solid var(--gray2);
-    margin-bottom: 10px;
+}
+
+.input-container__message{
+    color:var(--orange);
+    font-size: 10px;
 }
 
 .button-container{
