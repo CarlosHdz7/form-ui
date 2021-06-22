@@ -1,5 +1,8 @@
 window.addEventListener('load', (event) => {
 
+    //Variables
+    let flagKonamiCode = false;
+
     //Regexs
     const isValidName = new RegExp(/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/); 
     const onlyNumbers = new RegExp(/^[0-9]*$/);
@@ -31,6 +34,8 @@ window.addEventListener('load', (event) => {
     const MSGRepeatPassword = document.getElementById('MSGRepeatPassword');
     const MSGTerms = document.getElementById('MSGTerms');
 
+    const codeContainer = document.getElementById('codeContainer');
+
     //Settings
     FRMSignIn.reset();
 
@@ -42,6 +47,21 @@ window.addEventListener('load', (event) => {
 
     RNGExpecience.addEventListener('change',(e) =>{
         SPNExperience.textContent = e.target.value;
+    })
+
+    document.addEventListener('keyup',(e)=>{
+        e.preventDefault();
+        console.log(e);
+
+        if(!flagKonamiCode){
+            if(e.key == "ArrowUp"){
+                createContainer(e);
+                flagKonamiCode = true;
+            }
+        }else{
+            createContainer(e);
+        }
+
     })
 
 
@@ -221,6 +241,54 @@ window.addEventListener('load', (event) => {
             "Year's experience": RNGExpecience.value
         });
     }
+
+    const createContainer = (e) =>{
+
+        switch (e.key) {
+            case "ArrowUp":{
+                createArrow("up");
+             break;
+            }
+            
+            case "ArrowDown":{
+                createArrow("down");
+            break;
+            }
+
+            case "ArrowLeft":{
+                createArrow("left");
+            break;
+            }
+
+            case "ArrowRight":{
+                createArrow("right");
+            break;
+            }
+        
+            default:
+                createLetterOrNumber(e.key);
+                break;
+        }
+
+    }
+
+    const createArrow = (direction) => {
+        let div = document.createElement("DIV");
+        let img = document.createElement("IMG");
+        div.classList.add("button-code-arrow",direction);
+        img.setAttribute("src","img/down-arrow.png");
+        img.classList.add("img");
+        div.appendChild(img);
+        codeContainer.appendChild(div);
+    }
+
+    const createLetterOrNumber = (digit) => {
+        let div = document.createElement("DIV");
+        div.classList.add("button-code-letter");
+        div.innerHTML = digit;
+        codeContainer.appendChild(div);
+    }
+
     //Utilities
     const isEmptyString = text => (text == "") ? true : false;
     
