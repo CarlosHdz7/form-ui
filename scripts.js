@@ -6,7 +6,7 @@ window.addEventListener('load', (event) => {
     let activateCodeMode = false;
     let preventKeys = {37: 1, 38: 1, 39: 1, 40: 1, 33: 1, 34: 1,32: 1};
     let userInputs = [];
-    let konamiCode = [38,38,40,40,37,39,37,39,66,65]; //↑↑↓↓←→←→ab
+    let konamiCode = [38,38,40,40,37,39,37,39,66,65]; //↑↑↓↓←→←→ba
     let customCode = [38,72,65,88,54,52,56,57,88,68]; //↑Hax6489xd
 
     const isLetterOrNumber = new RegExp(/^[a-zA-Z0-9]{1}$/);
