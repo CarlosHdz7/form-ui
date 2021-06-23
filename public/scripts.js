@@ -1,20 +1,19 @@
 window.addEventListener('load', (event) => {
 
-    //Variables
+    //[VARIABLES]
     let flagKonamiCode = false;
-    let keys = {37: 1, 38: 1, 39: 1, 40: 1, 33: 1, 34: 1,32: 1};
-    let inputs = [];
-    let konamiCode = [38,38,40,40,37,39,65,66,49,50];
+    let preventKeys = {37: 1, 38: 1, 39: 1, 40: 1, 33: 1, 34: 1,32: 1};
+    let userInputs = [];
+    let konamiCode = [38,38,40,40,37,39,65,66,49,50]; //↑↑↓↓←→ab12
 
-    //Regexs
     const isLetterOrNumber = new RegExp(/^[a-zA-Z0-9]{1}$/);
     const isValidName = new RegExp(/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/); 
     const onlyNumbers = new RegExp(/^[0-9]*$/);
     const isPhoneNumber = new RegExp(/^[0-9]{4}-[0-9]{4}$/);
     const isValidEmail = new RegExp(/[\w]+@{1}[\w]+\.[a-z]{2,3}/);
-    const isvalidUrl = new RegExp(/^http[s]?:\/\/[\w]+([\.]+[\w]+)+$/);
+    const isvalidUrl = new RegExp(/^(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))|([-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))$/);
 
-    //[Objects]
+    //[HTML OBJECTS]
     const frmSignIn = document.getElementById('frmSignIn');
     const txtName = document.getElementById('txtName');
     const txtLastName = document.getElementById('txtLastName');
@@ -40,7 +39,7 @@ window.addEventListener('load', (event) => {
     const codeContainer = document.getElementById('codeContainer');
     const backgroundShadow = document.getElementById('backgroundShadow');
 
-    //[Events]
+    //[EVENTS]
     btnSignin.addEventListener('click',(e)=>{
         e.preventDefault();
         validateForm();
@@ -52,7 +51,7 @@ window.addEventListener('load', (event) => {
 
     document.addEventListener('keydown',(e)=>{
         
-        if (keys[e.keyCode]) {
+        if (preventKeys[e.keyCode]) {
             e.preventDefault(e);
         }
 
@@ -62,18 +61,21 @@ window.addEventListener('load', (event) => {
             if(e.key == "ArrowUp"){
                 flagKonamiCode = true;
                 document.activeElement.blur();
-                createContainer(e);
+                createButton(e);
                 backgroundShadow.classList.remove('d-none');
             }
         }else{
             document.activeElement.blur()
-            createContainer(e);
+            createButton(e);
         }
 
     })
 
 
-    //[Functions]
+    //[FUNCTIONS]
+
+    /*FORM FUNCTIONS*/
+    /*===================================================*/
     const validateForm = () => {
         let errors = [];
 
@@ -249,58 +251,60 @@ window.addEventListener('load', (event) => {
             "Year's experience": rgnExperience.value
         });
     }
+    /*===================================================*/
 
-    const createContainer = (e) =>{
+    /*KONAMI CODE FUNCTIONS*/
+    /*===================================================*/
+    const createButton = (e) =>{
         switch (e.key) {
             case "ArrowUp":{
                 createArrow("up");
-                inputs.push(e.which);
-                updateInputs();
+                userInputs.push(e.which);
+                updateButtons();
                 break;
             }
             
             case "ArrowDown":{
                 createArrow("down");
-                inputs.push(e.which);
-                updateInputs();
+                userInputs.push(e.which);
+                updateButtons();
                 break;
             }
 
             case "ArrowLeft":{
                 createArrow("left");
-                inputs.push(e.which);
-                updateInputs();
+                userInputs.push(e.which);
+                updateButtons();
                 break;
             }
 
             case "ArrowRight":{
                 createArrow("right");
-                inputs.push(e.which);
-                updateInputs();
+                userInputs.push(e.which);
+                updateButtons();
                 break;
             }
 
             case "Escape":{
-                clearCode();
-                updateInputs();
+                clearButtons();
                 break;
             }
 
             case "Enter":{
-                if(arrayEquals(inputs,konamiCode)){
+                if(arrayEquals(userInputs,konamiCode)){
                     console.log("true")
                 }else{
                     console.log("false");
                 }
-                clearCode();
+                clearButtons();
                 break;
             }
         
             default:
                 if(!isLetterOrNumber.test(e.key)) break;
                 createLetterOrNumber(e.key);
-                inputs.push(e.which);
-                updateInputs();
+                userInputs.push(e.which);
+                updateButtons();
                 break;
         }
 
@@ -323,30 +327,32 @@ window.addEventListener('load', (event) => {
         codeContainer.appendChild(div);
     }
 
-    const clearCode = () => {
-        inputs = [];
+    const clearButtons = () => {
+        userInputs = [];
         flagKonamiCode = false;
         backgroundShadow.classList.add('d-none');
         while(codeContainer.firstChild) codeContainer.removeChild(codeContainer.firstChild);
     }
 
-    const updateInputs = () => {
-        if(inputs.length > 10) {
+    const updateButtons = () => {
+        if(userInputs.length > 10) {
             codeContainer.removeChild(codeContainer.firstChild);
-            inputs.shift();
+            userInputs.shift();
             return;
         }
     }
+    /*===================================================*/
 
-    function arrayEquals(a, b) {
+    /*UTILITIES*/
+    /*===================================================*/
+    const isEmptyString = text => (text == "") ? true : false;
+
+    const arrayEquals = (a, b) =>{
         return Array.isArray(a) &&
             Array.isArray(b) &&
             a.length === b.length &&
             a.every((val, index) => val === b[index]);
     }
-      
-    //[Utilities]
-    const isEmptyString = text => (text == "") ? true : false;
     
     const clearWarning = (input, message) =>{
         message.textContent = "";
@@ -359,8 +365,9 @@ window.addEventListener('load', (event) => {
         message.classList.remove("d-none");
         input.classList.add("invalid-input");
     }
+    /*===================================================*/
 
     //[Settings]
     frmSignIn.reset();
-    clearCode();
+    clearButtons();
 });
