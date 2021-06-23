@@ -3,10 +3,11 @@
 window.addEventListener('load', (event) => {
 
     //[VARIABLES]
-    let codeMode = false;
+    let activateCodeMode = false;
     let preventKeys = {37: 1, 38: 1, 39: 1, 40: 1, 33: 1, 34: 1,32: 1};
     let userInputs = [];
-    let konamiCode = [38,38,40,40,37,39,65,66,49,50]; //↑↑↓↓←→ab12
+    let konamiCode = [38,38,40,40,37,39,37,39,66,65]; //↑↑↓↓←→←→ab
+    let customCode = [38,72,65,88,54,52,56]; //↑Hax648
 
     const isLetterOrNumber = new RegExp(/^[a-zA-Z0-9]{1}$/);
     const isValidName = new RegExp(/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/); 
@@ -40,6 +41,7 @@ window.addEventListener('load', (event) => {
     const msgTerms = document.getElementById('msgTerms');
     const codeContainer = document.getElementById('codeContainer');
     const backgroundShadow = document.getElementById('backgroundShadow');
+    const gif = document.getElementById('gif');
 
     //[EVENTS]
     btnSignin.addEventListener('click', (e) => {
@@ -59,12 +61,13 @@ window.addEventListener('load', (event) => {
 
         console.log(e);
 
-        if(!codeMode){
+        if(!activateCodeMode){
             if(e.key == 'ArrowUp'){
-                codeMode = true;
+                activateCodeMode = true;
                 document.activeElement.blur();
                 createButton(e);
                 backgroundShadow.classList.remove('d-none');
+                backgroundShadow.classList.add('center-gif');
             }
         }else{
             document.activeElement.blur()
@@ -257,30 +260,22 @@ window.addEventListener('load', (event) => {
     const createButton = (e) => {
         switch (e.key) {
             case 'ArrowUp':{
-                addContentButton('🢁');
-                userInputs.push(e.which);
-                updateButtons();
+                addContentButton('🢁', e.which);
                 break;
             }
             
             case 'ArrowDown':{
-                addContentButton('🢃');
-                userInputs.push(e.which);
-                updateButtons();
+                addContentButton('🢃', e.which);
                 break;
             }
 
             case 'ArrowLeft':{
-                addContentButton('🢀');
-                userInputs.push(e.which);
-                updateButtons();
+                addContentButton('🢀', e.which);
                 break;
             }
 
             case 'ArrowRight':{
-                addContentButton('🢂');
-                userInputs.push(e.which);
-                updateButtons();
+                addContentButton('🢂', e.which);
                 break;
             }
 
@@ -290,36 +285,44 @@ window.addEventListener('load', (event) => {
             }
 
             case 'Enter':{
-                if(arrayEquals(userInputs, konamiCode)){
-                    console.log('true')
+                if(arrayEquals(userInputs, konamiCode) || arrayEquals(userInputs, customCode)){
+                    changeColorButton('valid-button-code', 'add');
+                    gif.classList.remove('d-none');
                 }else{
-                    console.log('false');
+                    changeColorButton('invalid-button-code', 'add');
+                    setTimeout(function(){ 
+                        clearButtons();
+                     }, 400);
                 }
-                clearButtons();
                 break;
             }
         
             default:
                 if(!isLetterOrNumber.test(e.key)) break;
-                addContentButton(e.key);
-                userInputs.push(e.which);
-                updateButtons();
+                addContentButton(e.key, e.which);
                 break;
         }
 
     };
 
-    const addContentButton = (digit) => {
+    const addContentButton = (digit,keyCode) => {
         let div = document.createElement('DIV');
         div.classList.add('code-container__button');
         div.innerHTML = digit;
         codeContainer.appendChild(div);
+
+        userInputs.push(keyCode);
+        updateButtons();
     };
 
     const clearButtons = () => {
         userInputs = [];
-        codeMode = false;
+        activateCodeMode = false;
+        codeContainer.classList.remove('valid-code', 'invalid-code');
         backgroundShadow.classList.add('d-none');
+        backgroundShadow.classList.remove('center-gif');
+        changeColorButton('','clear');
+        gif.classList.add('d-none');
         while(codeContainer.firstChild) codeContainer.removeChild(codeContainer.firstChild);
     };
 
@@ -328,6 +331,14 @@ window.addEventListener('load', (event) => {
             codeContainer.removeChild(codeContainer.firstChild);
             userInputs.shift();
             return;
+        }
+    };
+
+    const changeColorButton = (className = '', option = 'add') => {
+        let buttons = document.getElementsByClassName('code-container__button');
+        for(let button of buttons){
+            if(option === 'clear') button.classList.remove('valid-button-code', 'invalid-button-code');
+            else if (option === 'add') button.classList.add(className);
         }
     };
 

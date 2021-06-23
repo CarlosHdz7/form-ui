@@ -5,6 +5,8 @@
     --black:#000;
     --blue:#2196F3;
     --orange:#FF240E;
+    --green:#1dd1a1;
+    --red:#ee5253;
     --radius:10px;
 }
 
@@ -191,6 +193,25 @@ body{
     -ms-user-select: none;
     user-select: none; 
     animation: popup 0.7s;
+}
+
+.valid-button-code{
+    background-color:var(--green);
+}
+
+.invalid-button-code{
+    background-color:var(--red);
+}
+
+.center-gif{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.escape-message{
+    color:var(--white);
+    font-weight: 700;
 }
 
 .img{
