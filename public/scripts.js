@@ -15,40 +15,39 @@ window.addEventListener('load', (event) => {
     const isvalidUrl = new RegExp(/^http[s]?:\/\/[\w]+([\.]+[\w]+)+$/);
 
     //[Objects]
-    const FRMSignIn = document.getElementById('FRMSignIn');
-    const TXTName = document.getElementById('TXTName');
-    const TXTLastname = document.getElementById('TXTLastname');
-    const TXTAge = document.getElementById('TXTAge');
-    const TXTPhone = document.getElementById('TXTPhone');
-    const TXTWebsite = document.getElementById('TXTWebsite');
-    const RNGExpecience = document.getElementById('RNGExpecience');
-    const SPNExperience = document.getElementById('SPNExperience');
-    const TXTEmail = document.getElementById('TXTEmail');
-    const TXTPassword = document.getElementById('TXTPassword');
-    const TXTRepeatPassword = document.getElementById('TXTRepeatPassword');
-    const CHKTerms = document.getElementById('CHKTerms');
-    const BTNSignin = document.getElementById('BTNSignin');
-    const MSGName = document.getElementById('MSGName');
-    const MSGLastname = document.getElementById('MSGLastname');
-    const MSGAge = document.getElementById('MSGAge');
-    const MSGPhone = document.getElementById('MSGPhone');
-    const MSGWebsite = document.getElementById('MSGWebsite');
-    const MSGEmail = document.getElementById('MSGEmail');
-    const MSGPassword = document.getElementById('MSGPassword');
-    const MSGRepeatPassword = document.getElementById('MSGRepeatPassword');
-    const MSGTerms = document.getElementById('MSGTerms');
-
+    const frmSignIn = document.getElementById('frmSignIn');
+    const txtName = document.getElementById('txtName');
+    const txtLastName = document.getElementById('txtLastName');
+    const txtAge = document.getElementById('txtAge');
+    const txtPhone = document.getElementById('txtPhone');
+    const txtWebSite = document.getElementById('txtWebSite');
+    const rgnExperience = document.getElementById('rgnExperience');
+    const spnExperience = document.getElementById('spnExperience');
+    const txtEmail = document.getElementById('txtEmail');
+    const txtPassword = document.getElementById('txtPassword');
+    const txtRepeatPassword = document.getElementById('txtRepeatPassword');
+    const chkTerms = document.getElementById('chkTerms');
+    const btnSignin = document.getElementById('btnSignin');
+    const msgName = document.getElementById('msgName');
+    const msgLastName = document.getElementById('msgLastName');
+    const msgAge = document.getElementById('msgAge');
+    const msgPhone = document.getElementById('msgPhone');
+    const msgWebSite = document.getElementById('msgWebSite');
+    const msgEmail = document.getElementById('msgEmail');
+    const msgPassword = document.getElementById('msgPassword');
+    const msgRepeatPassword = document.getElementById('msgRepeatPassword');
+    const msgTerms = document.getElementById('msgTerms');
     const codeContainer = document.getElementById('codeContainer');
     const backgroundShadow = document.getElementById('backgroundShadow');
 
     //[Events]
-    BTNSignin.addEventListener('click',(e)=>{
+    btnSignin.addEventListener('click',(e)=>{
         e.preventDefault();
         validateForm();
     });
 
-    RNGExpecience.addEventListener('change',(e) =>{
-        SPNExperience.textContent = e.target.value;
+    rgnExperience.addEventListener('change',(e) =>{
+        spnExperience.textContent = e.target.value;
     })
 
     document.addEventListener('keydown',(e)=>{
@@ -61,9 +60,9 @@ window.addEventListener('load', (event) => {
 
         if(!flagKonamiCode){
             if(e.key == "ArrowUp"){
+                flagKonamiCode = true;
                 document.activeElement.blur();
                 createContainer(e);
-                flagKonamiCode = true;
                 backgroundShadow.classList.remove('d-none');
             }
         }else{
@@ -100,160 +99,158 @@ window.addEventListener('load', (event) => {
 
     const validateName = () => {
 
-        if(isEmptyString(TXTName.value)){
-            showWarning(TXTName,MSGName,"You must provide a name");
+        if(isEmptyString(txtName.value)){
+            showWarning(txtName,msgName,"You must provide a name");
             return false;
         }
 
-        if(!isValidName.test(TXTName.value)){
-            showWarning(TXTName,MSGName,"The name must only contain letters");
+        if(!isValidName.test(txtName.value)){
+            showWarning(txtName,msgName,"The name must only contain letters");
             return false;
         }
 
-        clearWarning(TXTName,MSGName);
+        clearWarning(txtName,msgName);
         return true;
     }
 
     const validateLastName = () => {
-        if(isEmptyString(TXTLastname.value)){
-            showWarning(TXTLastname,MSGLastname,"You must provide a lastname");
+        if(isEmptyString(txtLastName.value)){
+            showWarning(txtLastName,msgLastName,"You must provide a lastname");
             return false;
         }
 
-        if(!isValidName.test(TXTLastname.value)){
-            showWarning(TXTLastname,MSGLastname,"The lastname must only contain letters");
+        if(!isValidName.test(txtLastName.value)){
+            showWarning(txtLastName,msgLastName,"The lastname must only contain letters");
             return false;
         }
 
-        clearWarning(TXTLastname,MSGLastname);
+        clearWarning(txtLastName,msgLastName);
         return true;
     }
 
     const validateAge = () => {
 
-        if(isEmptyString(TXTAge.value)){
-            showWarning(TXTAge,MSGAge,"You must provide an age");
+        if(isEmptyString(txtAge.value)){
+            showWarning(txtAge,msgAge,"You must provide an age");
             return false;
         }
 
-        if(!(TXTAge.value >= 18 && TXTAge.value <= 40)){
-            showWarning(TXTAge,MSGAge,"Age has to be between 18 and 40");
+        if(!(txtAge.value >= 18 && txtAge.value <= 40)){
+            showWarning(txtAge,msgAge,"Age has to be between 18 and 40");
             return false;
         }
 
-        if(!onlyNumbers.test(TXTAge.value)){
-            showWarning(TXTAge,MSGAge,"Invalid age");
+        if(!onlyNumbers.test(txtAge.value)){
+            showWarning(txtAge,msgAge,"Invalid age");
             return false;
         }
 
-        clearWarning(TXTAge,MSGAge);
+        clearWarning(txtAge,msgAge);
         return true;
     }
 
     const validatePhone = () =>{
-        if(isEmptyString(TXTPhone.value)){
-            showWarning(TXTPhone,MSGPhone,"You must provide a phone");
+        if(isEmptyString(txtPhone.value)){
+            showWarning(txtPhone,msgPhone,"You must provide a phone");
             return false;
         }
 
-        if(!isPhoneNumber.test(TXTPhone.value)){
-            showWarning(TXTPhone,MSGPhone,"You must provide a valid phone");
+        if(!isPhoneNumber.test(txtPhone.value)){
+            showWarning(txtPhone,msgPhone,"You must provide a valid phone");
             return false;
         }
 
-        clearWarning(TXTPhone,MSGPhone);
+        clearWarning(txtPhone,msgPhone);
         return true;
     }
 
     const validateWebSite = () => {
-        if(isEmptyString(TXTWebsite.value)){
-            showWarning(TXTWebsite,MSGWebsite,"You must provide an URL");
+        if(isEmptyString(txtWebSite.value)){
+            showWarning(txtWebSite,msgWebSite,"You must provide an URL");
             return false;
         }
 
-        if(!isvalidUrl.test(TXTWebsite.value)){
-            showWarning(TXTWebsite,MSGWebsite,"You must provide a valid URL");
+        if(!isvalidUrl.test(txtWebSite.value)){
+            showWarning(txtWebSite,msgWebSite,"You must provide a valid URL");
             return false;
         }
 
-        clearWarning(TXTWebsite,MSGWebsite);
+        clearWarning(txtWebSite,msgWebSite);
         return true;
     }
 
     const validateEmail = () => {
-        if(isEmptyString(TXTEmail.value)){
-            showWarning(TXTEmail,MSGEmail,"You must provide an email");
+        if(isEmptyString(txtEmail.value)){
+            showWarning(txtEmail,msgEmail,"You must provide an email");
             return false;
         }
 
-        if(!isValidEmail.test(TXTEmail.value)){
-            showWarning(TXTEmail,MSGEmail,"You must provide a valid email");
+        if(!isValidEmail.test(txtEmail.value)){
+            showWarning(txtEmail,msgEmail,"You must provide a valid email");
             return false;
         }
 
-        clearWarning(TXTEmail,MSGEmail);
+        clearWarning(txtEmail,msgEmail);
         return true;
     }
 
     const validatePassword1 = () => {
 
-        if(isEmptyString(TXTPassword.value)){
-            showWarning(TXTPassword,MSGPassword,"You must provide a password");
+        if(isEmptyString(txtPassword.value)){
+            showWarning(txtPassword,msgPassword,"You must provide a password");
             return false;
         }
 
-        if(TXTPassword.value.length < 6){
-            showWarning(TXTPassword,MSGPassword,"You must have at least 6 digits");
+        if(txtPassword.value.length < 6){
+            showWarning(txtPassword,msgPassword,"You must have at least 6 digits");
             return false;
         }
 
-        clearWarning(TXTPassword,MSGPassword);
+        clearWarning(txtPassword,msgPassword);
         return true;
     }
 
     const validatePassword2 = () => {
-        if(isEmptyString(TXTRepeatPassword.value)){
-            showWarning(TXTRepeatPassword,MSGRepeatPassword,"You must repeat the password");
+        if(isEmptyString(txtRepeatPassword.value)){
+            showWarning(txtRepeatPassword,msgRepeatPassword,"You must repeat the password");
             return false;
         }
 
-        if(TXTPassword.value !== TXTRepeatPassword.value){
-            showWarning(TXTRepeatPassword,MSGRepeatPassword,"Password doesn't match");
+        if(txtPassword.value !== txtRepeatPassword.value){
+            showWarning(txtRepeatPassword,msgRepeatPassword,"Password doesn't match");
             return false;
         }
-        clearWarning(TXTRepeatPassword,MSGRepeatPassword);
+        clearWarning(txtRepeatPassword,msgRepeatPassword);
         return true;
     }
 
     const agreeTerms = () => {
-        if(!CHKTerms.checked){
-            MSGTerms.textContent = "You must agree terms and coditions";
-            MSGTerms.classList.remove("d-none");
+        if(!chkTerms.checked){
+            msgTerms.textContent = "You must agree terms and coditions";
+            msgTerms.classList.remove("d-none");
             return false;
         }
 
-        MSGTerms.textContent = "";
-        MSGTerms.classList.add("d-none");
+        msgTerms.textContent = "";
+        msgTerms.classList.add("d-none");
         return true;
     }
 
     const showSubmittedData = () =>{
         console.log("%c ✅ Successfull submit","color:green");
         console.table({
-            "Name":TXTName.value,
-            "Last Name":TXTLastname.value,
-            "Age": TXTAge.value,
-            "Phone": TXTPhone.value,
-            "Website": TXTWebsite.value,
-            "Email": TXTEmail.value,
-            "Password": TXTPassword.value,
-            "Year's experience": RNGExpecience.value
+            "Name":txtName.value,
+            "Last Name":txtLastName.value,
+            "Age": txtAge.value,
+            "Phone": txtPhone.value,
+            "Website": txtWebSite.value,
+            "Email": txtEmail.value,
+            "Password": txtPassword.value,
+            "Year's experience": rgnExperience.value
         });
     }
 
     const createContainer = (e) =>{
-
-    
         switch (e.key) {
             case "ArrowUp":{
                 createArrow("up");
@@ -343,12 +340,11 @@ window.addEventListener('load', (event) => {
 
     function arrayEquals(a, b) {
         return Array.isArray(a) &&
-          Array.isArray(b) &&
-          a.length === b.length &&
-          a.every((val, index) => val === b[index]);
-      }
+            Array.isArray(b) &&
+            a.length === b.length &&
+            a.every((val, index) => val === b[index]);
+    }
       
-
     //[Utilities]
     const isEmptyString = text => (text == "") ? true : false;
     
@@ -365,6 +361,6 @@ window.addEventListener('load', (event) => {
     }
 
     //[Settings]
-    FRMSignIn.reset();
+    frmSignIn.reset();
     clearCode();
 });

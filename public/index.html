@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <form class="form" action="#" id="FRMSignIn">
+        <form class="form" action="#" id="frmSignIn">
             <h2 class="title text-center">Welcome aboard</h2>
             <p class="sub-title text-center text-bold">Create account to getting started</p>
             <hr>
@@ -19,64 +19,64 @@
                 <div class="grid__left">
                     <p class="text-bold">1. Personal info</p>
                     <div class="input-container">
-                        <label class="input-label" for="TXTName">Name</label>
-                        <input class="input" type="text" id="TXTName" placeholder="Ex. John Doe">
-                        <small id="MSGName" class="input-container__message d-none"></small>
+                        <label class="input-label" for="txtName">Name</label>
+                        <input class="input" type="text" id="txtName" placeholder="Ex. John Doe">
+                        <small id="msgName" class="input-container__message d-none"></small>
                     </div>
                     <div class="input-container">
-                        <label class="input-label" for="TXTLastname">Lastname</label>
-                        <input class="input" type="text" id="TXTLastname" placeholder="Ex. Hawkings">
-                        <small id="MSGLastname" class="input-container__message d-none"></small>
+                        <label class="input-label" for="txtLastName">Lastname</label>
+                        <input class="input" type="text" id="txtLastName" placeholder="Ex. Hawkings">
+                        <small id="msgLastName" class="input-container__message d-none"></small>
                     </div>
                     <div class="input-container">
-                        <label class="input-label" for="TXTAge">Age</label>
-                        <input class="input" type="number" id="TXTAge" placeholder="Ex. 18" min="1" max="50">
-                        <small id="MSGAge" class="input-container__message d-none"></small>
+                        <label class="input-label" for="txtAge">Age</label>
+                        <input class="input" type="number" id="txtAge" placeholder="Ex. 18" min="1" max="50">
+                        <small id="msgAge" class="input-container__message d-none"></small>
                     </div>
                     <div class="input-container">
-                        <label class="input-label" for="TXTPhone">Phone</label>
-                        <input class="input" type="tel" id="TXTPhone" placeholder="Ex. 7775-3184">
-                        <small id="MSGPhone" class="input-container__message d-none"></small>
+                        <label class="input-label" for="txtPhone">Phone</label>
+                        <input class="input" type="tel" id="txtPhone" placeholder="Ex. 7775-3184">
+                        <small id="msgPhone" class="input-container__message d-none"></small>
                     </div>
                     <p class="text-bold">2. Experience</p>
                     <div class="input-container">
-                        <label class="input-label" for="TXTWebsite">Website</label>
-                        <input class="input" type="url" id="TXTWebsite" placeholder="Ex. http://www.johndoe.com">
-                        <small id="MSGWebsite" class="input-container__message d-none"></small>
+                        <label class="input-label" for="txtWebSite">Website</label>
+                        <input class="input" type="url" id="txtWebSite" placeholder="Ex. http://www.johndoe.com">
+                        <small id="msgWebSite" class="input-container__message d-none"></small>
                     </div>
                     <div class="input-container">
-                        <label class="input-label" for="RNGExpecience">Experience (Years)</label>
+                        <label class="input-label" for="rgnExperience">Experience (Years)</label>
                         <div class="range-container">
-                            <input type="range" min="1" max="5" value="1" class="slider" id="RNGExpecience">
-                            <span class="range-years" id="SPNExperience">1</span>
+                            <input type="range" min="1" max="5" value="1" class="slider" id="rgnExperience">
+                            <span class="range-years" id="spnExperience">1</span>
                         </div>
                     </div>
                 </div>
                 <div class="grid__rigth">
                     <p class="text-bold">3. Account</p>
                     <div class="input-container">
-                        <label class="input-label" for="TXTEmail">Email</label>
-                        <input class="input" type="email" id="TXTEmail" placeholder="Ex. johndoe@gmail.com">
-                        <small id="MSGEmail" class="input-container__message d-none"></small>
+                        <label class="input-label" for="txtEmail">Email</label>
+                        <input class="input" type="email" id="txtEmail" placeholder="Ex. johndoe@gmail.com">
+                        <small id="msgEmail" class="input-container__message d-none"></small>
                     </div>
                     <div class="input-container">
-                        <label class="input-label" for="TXTPassword">Password</label>
-                        <input class="input" type="password" id="TXTPassword"  placeholder="Must have at least 6 characters">
-                        <small id="MSGPassword" class="input-container__message d-none"></small>
+                        <label class="input-label" for="txtPassword">Password</label>
+                        <input class="input" type="password" id="txtPassword"  placeholder="Must have at least 6 characters">
+                        <small id="msgPassword" class="input-container__message d-none"></small>
                     </div>
                     <div class="input-container">
-                        <label class="input-label" for="TXTRepeatPassword">Repeat Password</label>
-                        <input class="input" type="password" id="TXTRepeatPassword">
-                        <small id="MSGRepeatPassword" class="input-container__message d-none"></small>
+                        <label class="input-label" for="txtRepeatPassword">Repeat Password</label>
+                        <input class="input" type="password" id="txtRepeatPassword">
+                        <small id="msgRepeatPassword" class="input-container__message d-none"></small>
                     </div>
                     <div class="input-container">
-                        <input type="checkbox" id="CHKTerms" name="scales">
-                        <label for="CHKTerms" class="terms-container">I agree with <a class="terms" href="#">the terms and conditions</a></label>
-                        <p><small id="MSGTerms" class="input-container__message d-none"></small></p>
+                        <input type="checkbox" id="chkTerms" name="scales">
+                        <label for="chkTerms" class="terms-container">I agree with <a class="terms" href="#">the terms and conditions</a></label>
+                        <p><small id="msgTerms" class="input-container__message d-none"></small></p>
                     </div>
 
                     <div class="button-container">
-                        <input class="button" type="submit" value="Sign in" id="BTNSignin">
+                        <input class="button" type="submit" value="Sign in" id="btnSignin">
                     </div>
                 </div>
             </div>
