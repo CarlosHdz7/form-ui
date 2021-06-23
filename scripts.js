@@ -1,6 +1,6 @@
 'use strict';
 
-window.addEventListener('load', (event) => {
+window.addEventListener('load', () => {
 
     //[VARIABLES]
     let userInputs = [];
@@ -85,7 +85,6 @@ window.addEventListener('load', (event) => {
     };
 
     const validateName = () => {
-
         if(!txtName.value){
             showWarning(txtName, msgName, 'You must provide a name.');
             return false;
@@ -116,7 +115,6 @@ window.addEventListener('load', (event) => {
     };
 
     const validateAge = () => {
-
         if(!txtAge.value){
             showWarning(txtAge, msgAge, 'You must provide an age.');
             return false;
@@ -182,7 +180,6 @@ window.addEventListener('load', (event) => {
     };
 
     const validatePassword1 = () => {
-
         if(!txtPassword.value){
             showWarning(txtPassword, msgPassword, 'You must provide a password.');
             return false;
@@ -253,7 +250,7 @@ window.addEventListener('load', (event) => {
 
         setTimeout(function(){ 
             hideEasterEgg();
-         }, 3000);
+        }, 3000);
     };
 
     const updateInputsArray = () => {
