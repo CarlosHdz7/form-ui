@@ -2,7 +2,9 @@ window.addEventListener('load', (event) => {
 
     //Variables
     let flagKonamiCode = false;
-    var keys = {37: 1, 38: 1, 39: 1, 40: 1, 33: 1, 34: 1,32: 1};
+    let keys = {37: 1, 38: 1, 39: 1, 40: 1, 33: 1, 34: 1,32: 1};
+    let inputs = [];
+    let konamiCode = [38,38,40,40,37,39,65,66,49,50];
 
     //Regexs
     const isLetterOrNumber = new RegExp(/^[a-zA-Z0-9]{1}$/);
@@ -39,9 +41,6 @@ window.addEventListener('load', (event) => {
     const codeContainer = document.getElementById('codeContainer');
     const backgroundShadow = document.getElementById('backgroundShadow');
 
-    //Settings
-    FRMSignIn.reset();
-
     //[Events]
     BTNSignin.addEventListener('click',(e)=>{
         e.preventDefault();
@@ -53,6 +52,7 @@ window.addEventListener('load', (event) => {
     })
 
     document.addEventListener('keydown',(e)=>{
+        
         if (keys[e.keyCode]) {
             e.preventDefault(e);
         }
@@ -61,7 +61,7 @@ window.addEventListener('load', (event) => {
 
         if(!flagKonamiCode){
             if(e.key == "ArrowUp"){
-                document.activeElement.blur()
+                document.activeElement.blur();
                 createContainer(e);
                 flagKonamiCode = true;
                 backgroundShadow.classList.remove('d-none');
@@ -257,25 +257,44 @@ window.addEventListener('load', (event) => {
         switch (e.key) {
             case "ArrowUp":{
                 createArrow("up");
+                inputs.push(e.which);
+                updateInputs();
                 break;
             }
             
             case "ArrowDown":{
                 createArrow("down");
+                inputs.push(e.which);
+                updateInputs();
                 break;
             }
 
             case "ArrowLeft":{
                 createArrow("left");
+                inputs.push(e.which);
+                updateInputs();
                 break;
             }
 
             case "ArrowRight":{
                 createArrow("right");
+                inputs.push(e.which);
+                updateInputs();
                 break;
             }
 
             case "Escape":{
+                clearCode();
+                updateInputs();
+                break;
+            }
+
+            case "Enter":{
+                if(arrayEquals(inputs,konamiCode)){
+                    console.log("true")
+                }else{
+                    console.log("false");
+                }
                 clearCode();
                 break;
             }
@@ -283,6 +302,8 @@ window.addEventListener('load', (event) => {
             default:
                 if(!isLetterOrNumber.test(e.key)) break;
                 createLetterOrNumber(e.key);
+                inputs.push(e.which);
+                updateInputs();
                 break;
         }
 
@@ -306,12 +327,29 @@ window.addEventListener('load', (event) => {
     }
 
     const clearCode = () => {
+        inputs = [];
         flagKonamiCode = false;
         backgroundShadow.classList.add('d-none');
         while(codeContainer.firstChild) codeContainer.removeChild(codeContainer.firstChild);
     }
 
-    //Utilities
+    const updateInputs = () => {
+        if(inputs.length > 10) {
+            codeContainer.removeChild(codeContainer.firstChild);
+            inputs.shift();
+            return;
+        }
+    }
+
+    function arrayEquals(a, b) {
+        return Array.isArray(a) &&
+          Array.isArray(b) &&
+          a.length === b.length &&
+          a.every((val, index) => val === b[index]);
+      }
+      
+
+    //[Utilities]
     const isEmptyString = text => (text == "") ? true : false;
     
     const clearWarning = (input, message) =>{
@@ -325,4 +363,8 @@ window.addEventListener('load', (event) => {
         message.classList.remove("d-none");
         input.classList.add("invalid-input");
     }
+
+    //[Settings]
+    FRMSignIn.reset();
+    clearCode();
 });
