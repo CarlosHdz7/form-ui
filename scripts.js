@@ -3,11 +3,10 @@
 window.addEventListener('load', (event) => {
 
     //[VARIABLES]
-    let activateCodeMode = false;
-    let preventKeys = {37: 1, 38: 1, 39: 1, 40: 1, 33: 1, 34: 1,32: 1};
     let userInputs = [];
     let konamiCode = [38,38,40,40,37,39,37,39,66,65]; //↑↑↓↓←→←→ba
-    let customCode = [38,72,65,88,54,52,56,57,88,68]; //↑Hax6489xd
+    let customCode = [72,65,88,54,52,56,57,88,68,68]; //Hax6489xdd
+    let validKeyCodes = [38,40,37,39]; //↑↓←→
 
     const isLetterOrNumber = new RegExp(/^[a-zA-Z0-9]{1}$/);
     const isValidName = new RegExp(/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/); 
@@ -39,7 +38,6 @@ window.addEventListener('load', (event) => {
     const msgPassword = document.getElementById('msgPassword');
     const msgRepeatPassword = document.getElementById('msgRepeatPassword');
     const msgTerms = document.getElementById('msgTerms');
-    const codeContainer = document.getElementById('codeContainer');
     const backgroundShadow = document.getElementById('backgroundShadow');
     const gif = document.getElementById('gif');
 
@@ -53,30 +51,10 @@ window.addEventListener('load', (event) => {
         spnExperience.textContent = e.target.value;
     });
 
-    document.addEventListener('keydown', (e) => {
-        
-        // if (preventKeys[e.keyCode]) {
-        //     e.preventDefault(e);
-        // }
-
-        // console.log(e);
-
-        // if(!activateCodeMode){
-        //     if(e.key == 'ArrowUp'){
-        //         activateCodeMode = true;
-        //         document.activeElement.blur();
-        //         createButton(e);
-        //         backgroundShadow.classList.remove('d-none');
-        //         backgroundShadow.classList.add('center-gif');
-        //     }
-        // }else{
-        //     document.activeElement.blur()
-        //     createButton(e);
-        // }
-
+    document.addEventListener('keyup', (e) => {
+        if(!isLetterOrNumber.test(e.key) && !validKeyCodes.includes(e.keyCode)) return;
         userInputs.push(e.which);
-        updateButtons();
-
+        updateInputsArray();
     });
 
 
@@ -98,7 +76,7 @@ window.addEventListener('load', (event) => {
         console.clear();
 
         if(errors.includes(false)){
-            console.log('%c 🚨 Invalid submit','color:red');
+            console.log('%c 🚨 Invalid submit', 'color:red');
             return;
         }
 
@@ -260,127 +238,28 @@ window.addEventListener('load', (event) => {
     };
 
     /*KONAMI CODE FUNCTIONS*/
-    const createButton = (e) => {
-        switch (e.key) {
-            case 'ArrowUp':{
-                addContentButton('🢁', e.which);
-                break;
-            }
-            
-            case 'ArrowDown':{
-                addContentButton('🢃', e.which);
-                break;
-            }
-
-            case 'ArrowLeft':{
-                addContentButton('🢀', e.which);
-                break;
-            }
-
-            case 'ArrowRight':{
-                addContentButton('🢂', e.which);
-                break;
-            }
-
-            case 'Escape':{
-                clearButtons();
-                break;
-            }
-
-            case 'Enter':{
-                if(arrayEquals(userInputs, konamiCode) || arrayEquals(userInputs, customCode)){
-                    changeColorButton('valid-button-code', 'add');
-                    gif.classList.remove('d-none');
-                }else{
-                    changeColorButton('invalid-button-code', 'add');
-                    setTimeout(function(){ 
-                        clearButtons();
-                     }, 400);
-                }
-                break;
-            }
-        
-            default:
-                if(!isLetterOrNumber.test(e.key)) break;
-                addContentButton(e.key, e.which);
-                break;
-        }
-
-    };
-
-    const addContentButton = (digit,keyCode) => {
-        let div = document.createElement('DIV');
-        div.classList.add('code-container__button');
-        div.innerHTML = digit;
-        codeContainer.appendChild(div);
-
-        userInputs.push(keyCode);
-        updateButtons();
-    };
-
-    // const clearButtons = () => {
-    //     userInputs = [];
-    //     activateCodeMode = false;
-    //     codeContainer.classList.remove('valid-code', 'invalid-code');
-    //     backgroundShadow.classList.add('d-none');
-    //     backgroundShadow.classList.remove('center-gif');
-    //     changeColorButton('','clear');
-    //     gif.classList.add('d-none');
-    //     while(codeContainer.firstChild) codeContainer.removeChild(codeContainer.firstChild);
-    // };
-
-    const clearButtons = () => {
+    const hideEasterEgg = () => {
         userInputs = [];
         backgroundShadow.classList.add('d-none');
         backgroundShadow.classList.remove('center-gif');
         gif.classList.add('d-none');
     };
 
-    // const updateButtons = () => {
-    //     if(userInputs.length > 10) {
-    //         codeContainer.removeChild(codeContainer.firstChild);
-    //         userInputs.shift();
-    //         return;
-    //     }
-    // };
+    const showEasterEgg = () => {
+        document.activeElement.blur();
+        backgroundShadow.classList.remove('d-none');
+        backgroundShadow.classList.add('center-gif');
+        gif.classList.remove('d-none');
 
-    const updateButtons = () => {
-        console.log(userInputs);
-
-        if(userInputs.length >= 10) {
-            
-            if(arrayEquals(userInputs, konamiCode) || arrayEquals(userInputs, customCode)){
-                console.log("correcto")
-                console.log(userInputs)
-                console.log(konamiCode)
-                console.log(customCode)
-
-
-                document.activeElement.blur();
-                backgroundShadow.classList.remove('d-none');
-                backgroundShadow.classList.add('center-gif');
-                gif.classList.remove('d-none');
-
-                setTimeout(function(){ 
-                    clearButtons();
-                 }, 3000);
-
-            }else{
-                console.log("incorrecto")
-                console.log(userInputs)
-                console.log(konamiCode)
-            }
-
-            userInputs.shift();
-            return;
-        }
+        setTimeout(function(){ 
+            hideEasterEgg();
+         }, 3000);
     };
 
-    const changeColorButton = (className = '', option = 'add') => {
-        let buttons = document.getElementsByClassName('code-container__button');
-        for(let button of buttons){
-            if(option === 'clear') button.classList.remove('valid-button-code', 'invalid-button-code');
-            else if (option === 'add') button.classList.add(className);
+    const updateInputsArray = () => {
+        if(userInputs.length >= 10) {
+            if(arrayEquals(userInputs, konamiCode) || arrayEquals(userInputs, customCode)) showEasterEgg();
+            userInputs.shift();
         }
     };
 
@@ -406,5 +285,5 @@ window.addEventListener('load', (event) => {
 
     //[SETTINGS]
     frmSignIn.reset();
-    clearButtons();
+    hideEasterEgg();
 });

@@ -166,52 +166,10 @@ body{
     height: 100%;
 }
 
-.code-container{
-    position: absolute;
-    top:25px;
-    right: 25px;
-    display: flex;
-    width: auto;
-    height: auto;
-}
-
-.code-container__button{
-    width: 50px;
-    height: 50px;
-    margin:2px;
-    font-size: 25px;
-    line-height: 1px;
-    color: var(--white);
-    display: flex;
-    justify-content: center;
-    align-items:center;
-    background-color:var(--blue);
-    font-weight: 700;
-    border-radius:50%;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none; 
-    animation: popup 0.7s;
-}
-
-.valid-button-code{
-    background-color:var(--green);
-}
-
-.invalid-button-code{
-    background-color:var(--red);
-}
-
 .center-gif{
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.escape-message{
-    color:var(--white);
-    font-weight: 700;
 }
 
 .img{
