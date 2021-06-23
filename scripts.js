@@ -3,7 +3,7 @@
 window.addEventListener('load', (event) => {
 
     //[VARIABLES]
-    let flagKonamiCode = false;
+    let codeMode = false;
     let preventKeys = {37: 1, 38: 1, 39: 1, 40: 1, 33: 1, 34: 1,32: 1};
     let userInputs = [];
     let konamiCode = [38,38,40,40,37,39,65,66,49,50]; //↑↑↓↓←→ab12
@@ -59,9 +59,9 @@ window.addEventListener('load', (event) => {
 
         console.log(e);
 
-        if(!flagKonamiCode){
+        if(!codeMode){
             if(e.key == 'ArrowUp'){
-                flagKonamiCode = true;
+                codeMode = true;
                 document.activeElement.blur();
                 createButton(e);
                 backgroundShadow.classList.remove('d-none');
@@ -318,7 +318,7 @@ window.addEventListener('load', (event) => {
 
     const clearButtons = () => {
         userInputs = [];
-        flagKonamiCode = false;
+        codeMode = false;
         backgroundShadow.classList.add('d-none');
         while(codeContainer.firstChild) codeContainer.removeChild(codeContainer.firstChild);
     };
