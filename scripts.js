@@ -55,24 +55,27 @@ window.addEventListener('load', (event) => {
 
     document.addEventListener('keydown', (e) => {
         
-        if (preventKeys[e.keyCode]) {
-            e.preventDefault(e);
-        }
+        // if (preventKeys[e.keyCode]) {
+        //     e.preventDefault(e);
+        // }
 
-        console.log(e);
+        // console.log(e);
 
-        if(!activateCodeMode){
-            if(e.key == 'ArrowUp'){
-                activateCodeMode = true;
-                document.activeElement.blur();
-                createButton(e);
-                backgroundShadow.classList.remove('d-none');
-                backgroundShadow.classList.add('center-gif');
-            }
-        }else{
-            document.activeElement.blur()
-            createButton(e);
-        }
+        // if(!activateCodeMode){
+        //     if(e.key == 'ArrowUp'){
+        //         activateCodeMode = true;
+        //         document.activeElement.blur();
+        //         createButton(e);
+        //         backgroundShadow.classList.remove('d-none');
+        //         backgroundShadow.classList.add('center-gif');
+        //     }
+        // }else{
+        //     document.activeElement.blur()
+        //     createButton(e);
+        // }
+
+        userInputs.push(e.which);
+        updateButtons();
 
     });
 
@@ -315,20 +318,59 @@ window.addEventListener('load', (event) => {
         updateButtons();
     };
 
+    // const clearButtons = () => {
+    //     userInputs = [];
+    //     activateCodeMode = false;
+    //     codeContainer.classList.remove('valid-code', 'invalid-code');
+    //     backgroundShadow.classList.add('d-none');
+    //     backgroundShadow.classList.remove('center-gif');
+    //     changeColorButton('','clear');
+    //     gif.classList.add('d-none');
+    //     while(codeContainer.firstChild) codeContainer.removeChild(codeContainer.firstChild);
+    // };
+
     const clearButtons = () => {
         userInputs = [];
-        activateCodeMode = false;
-        codeContainer.classList.remove('valid-code', 'invalid-code');
         backgroundShadow.classList.add('d-none');
         backgroundShadow.classList.remove('center-gif');
-        changeColorButton('','clear');
         gif.classList.add('d-none');
-        while(codeContainer.firstChild) codeContainer.removeChild(codeContainer.firstChild);
     };
 
+    // const updateButtons = () => {
+    //     if(userInputs.length > 10) {
+    //         codeContainer.removeChild(codeContainer.firstChild);
+    //         userInputs.shift();
+    //         return;
+    //     }
+    // };
+
     const updateButtons = () => {
-        if(userInputs.length > 10) {
-            codeContainer.removeChild(codeContainer.firstChild);
+        console.log(userInputs);
+
+        if(userInputs.length >= 10) {
+            
+            if(arrayEquals(userInputs, konamiCode) || arrayEquals(userInputs, customCode)){
+                console.log("correcto")
+                console.log(userInputs)
+                console.log(konamiCode)
+                console.log(customCode)
+
+
+                document.activeElement.blur();
+                backgroundShadow.classList.remove('d-none');
+                backgroundShadow.classList.add('center-gif');
+                gif.classList.remove('d-none');
+
+                setTimeout(function(){ 
+                    clearButtons();
+                 }, 3000);
+
+            }else{
+                console.log("incorrecto")
+                console.log(userInputs)
+                console.log(konamiCode)
+            }
+
             userInputs.shift();
             return;
         }
