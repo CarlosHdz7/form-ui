@@ -258,28 +258,28 @@ window.addEventListener('load', (event) => {
     const createButton = (e) =>{
         switch (e.key) {
             case "ArrowUp":{
-                createArrow("up");
+                addContentButton("🢁");
                 userInputs.push(e.which);
                 updateButtons();
                 break;
             }
             
             case "ArrowDown":{
-                createArrow("down");
+                addContentButton("🢃");
                 userInputs.push(e.which);
                 updateButtons();
                 break;
             }
 
             case "ArrowLeft":{
-                createArrow("left");
+                addContentButton("🢀");
                 userInputs.push(e.which);
                 updateButtons();
                 break;
             }
 
             case "ArrowRight":{
-                createArrow("right");
+                addContentButton("🢂");
                 userInputs.push(e.which);
                 updateButtons();
                 break;
@@ -302,7 +302,7 @@ window.addEventListener('load', (event) => {
         
             default:
                 if(!isLetterOrNumber.test(e.key)) break;
-                createLetterOrNumber(e.key);
+                addContentButton(e.key);
                 userInputs.push(e.which);
                 updateButtons();
                 break;
@@ -310,19 +310,9 @@ window.addEventListener('load', (event) => {
 
     }
 
-    const createArrow = (direction) => {
+    const addContentButton = (digit) => {
         let div = document.createElement("DIV");
-        let img = document.createElement("IMG");
-        div.classList.add("button-code-arrow",direction);
-        img.setAttribute("src","img/down-arrow.png");
-        img.classList.add("img");
-        div.appendChild(img);
-        codeContainer.appendChild(div);
-    }
-
-    const createLetterOrNumber = (digit) => {
-        let div = document.createElement("DIV");
-        div.classList.add("button-code-letter");
+        div.classList.add("code-container__button");
         div.innerHTML = digit;
         codeContainer.appendChild(div);
     }
