@@ -7,7 +7,9 @@ window.addEventListener('load', () => {
     let konamiCode = [38,38,40,40,37,39,37,39,66,65]; //↑↑↓↓←→←→ba
     let customCode = [72,65,88,54,52,56,57,88,68,68]; //Hax6489xdd
     let validKeyCodes = [38,40,37,39]; //↑↓←→
+    let showPassword = false;
 
+    const strongPassword = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/);
     const isLetterOrNumber = new RegExp(/^[a-zA-Z0-9]{1}$/);
     const isValidName = new RegExp(/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/); 
     const onlyNumbers = new RegExp(/^[0-9]*$/);
@@ -40,6 +42,8 @@ window.addEventListener('load', () => {
     const msgTerms = document.getElementById('msgTerms');
     const backgroundShadow = document.getElementById('backgroundShadow');
     const gif = document.getElementById('gif');
+    const btnShowPassword = document.getElementById('btnShowPassword');
+    const passwordInputs = document.getElementsByClassName('show-item');
 
     //[EVENTS]
     btnSignin.addEventListener('click', (e) => {
@@ -57,6 +61,17 @@ window.addEventListener('load', () => {
         updateInputsArray();
     });
 
+    btnShowPassword.addEventListener('click', function(){
+        if(showPassword){
+            this.classList.add('show-password__active');
+            for(let input of passwordInputs) input.type = 'text';
+            showPassword = false;
+        }else{
+            this.classList.remove('show-password__active');
+            for(let input of passwordInputs) input.type = 'password';
+            showPassword = true;
+        }
+    });
 
     //[FUNCTIONS]
 
@@ -185,10 +200,12 @@ window.addEventListener('load', () => {
             return false;
         }
 
-        if(txtPassword.value.length < 6){
-            showWarning(txtPassword, msgPassword, 'You must have at least 6 digits.');
+        if(!strongPassword.test(txtPassword.value)){
+            showWarning(txtPassword, msgPassword, 'The password must contain at least 1 lowercase character, 1 uppercase caracter, 1 numeric character and must be 8 characters or longer.');
             return false;
         }
+
+        strongPassword
 
         clearWarning(txtPassword, msgPassword);
         return true;

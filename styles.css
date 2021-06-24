@@ -91,6 +91,13 @@ body{
     border: 1px solid var(--gray2);
 }
 
+.input--password{
+    width: calc(100% - 42px);
+    box-sizing: border-box;
+    padding:10px;
+    border: 1px solid var(--gray2);
+}
+
 .input-container__message{
     color:var(--orange);
     font-size: 10px;
@@ -175,6 +182,23 @@ body{
 .img{
     width: 100%;
     height: 100%;
+}
+
+.password-container{
+    display: flex;
+}
+
+.show-password{
+    padding:5px;
+    width: 28px;
+    height: 28px;
+    margin-left: 2px;
+    cursor:pointer;
+}
+
+.show-password__active{
+    background-color: var(--gray2);
+    border-radius: 3px;
 }
 
 @media (max-width: 800px) {

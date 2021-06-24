@@ -61,12 +61,17 @@
                     </div>
                     <div class="input-container">
                         <label class="input-label" for="txtPassword">Password</label>
-                        <input class="input" type="password" id="txtPassword"  placeholder="Must have at least 6 characters">
+                        <div class="password-container">
+                            <input class="input--password show-item" type="password" id="txtPassword"  placeholder="Must have at least 8 characters">
+                            <div class="show-password" id="btnShowPassword">
+                                <img src="img/view.png" class="img" alt="">
+                            </div>
+                        </div>
                         <small id="msgPassword" class="input-container__message d-none"></small>
                     </div>
                     <div class="input-container">
                         <label class="input-label" for="txtRepeatPassword">Repeat Password</label>
-                        <input class="input" type="password" id="txtRepeatPassword">
+                        <input class="input show-item" type="password" id="txtRepeatPassword">
                         <small id="msgRepeatPassword" class="input-container__message d-none"></small>
                     </div>
                     <div class="input-container">
