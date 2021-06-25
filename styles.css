@@ -192,8 +192,13 @@ body{
     padding:5px;
     width: 28px;
     height: 28px;
-    margin-left: 2px;
+    margin-left: 3px;
     cursor:pointer;
+    background-image: url(./img/view.png);
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the*/
+    background-origin: content-box;
 }
 
 .show-password__active{

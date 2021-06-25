@@ -14,3 +14,4 @@ const chkTerms = document.getElementById('chkTerms');
 const btnSignin = document.getElementById('btnSignin');
 const msgTerms = document.getElementById('msgTerms');
 const btnShowPassword = document.getElementById('btnShowPassword');
+const passwordInputs = document.getElementsByClassName('show-item');

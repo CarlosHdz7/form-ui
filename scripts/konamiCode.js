@@ -15,8 +15,7 @@ import { arrayEquals } from './utilities.js';
 
   //[EVENTS]
   document.addEventListener('keyup', e => {
-    if (!isLetterOrNumber.test(e.key) && !validKeyCodes.includes(e.keyCode))
-      return;
+    if (!isLetterOrNumber.test(e.key) && !validKeyCodes.includes(e.keyCode)) { return };
     userInputs.push(e.which);
     updateInputsArray();
   });
@@ -35,14 +34,15 @@ import { arrayEquals } from './utilities.js';
     backgroundShadow.classList.add('center-gif');
     gif.classList.remove('d-none');
 
-    setTimeout(function () {
+    setTimeout( () => {
       hideEasterEgg();
     }, 3000);
   };
 
   const updateInputsArray = () => {
     if (userInputs.length >= 10) {
-      if (arrayEquals(userInputs, konamiCode) || arrayEquals(userInputs, customCode)) showEasterEgg();
+      if (arrayEquals(userInputs, konamiCode) || arrayEquals(userInputs, customCode)) { showEasterEgg(); };
+
       userInputs.shift();
     }
   };
