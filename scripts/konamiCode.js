@@ -1,13 +1,12 @@
-import { isLetterOrNumber } from './regexs.js';
 import { arrayEquals } from './utilities.js';
 
 (function () {
 
   //[VARIABLES]
   let userInputs = [];
-  let konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; //↑↑↓↓←→←→ba
-  let customCode = [72, 65, 88, 54, 52, 56, 57, 88, 68, 68]; //Hax6489xdd
-  let validKeyCodes = [38, 40, 37, 39]; //↑↓←→
+  let konamiCode = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a']; //[↑↑↓↓←→←→ba]
+  let customCode = ['h', 'a', 'x', '1', '2', '3', 'x', 'd', 'd', 'd']; //[hax123xddd]
+  let ignoreKeys = ['Shift','CapsLock', 'NumLock'];
 
   //[HTML ELEMENTS]
   const backgroundShadow = document.getElementById('backgroundShadow');
@@ -15,8 +14,9 @@ import { arrayEquals } from './utilities.js';
 
   //[EVENTS]
   document.addEventListener('keyup', e => {
-    if (!isLetterOrNumber.test(e.key) && !validKeyCodes.includes(e.keyCode)) { return };
-    userInputs.push(e.which);
+    if (ignoreKeys.includes(e.key)) { return };
+
+    userInputs.push(e.key.toLowerCase());
     updateInputsArray();
   });
 
@@ -41,8 +41,9 @@ import { arrayEquals } from './utilities.js';
 
   const updateInputsArray = () => {
     if (userInputs.length >= 10) {
-      if (arrayEquals(userInputs, konamiCode) || arrayEquals(userInputs, customCode)) { showEasterEgg(); };
-
+      if (arrayEquals(userInputs, konamiCode) || arrayEquals(userInputs, customCode)) { 
+        showEasterEgg(); 
+      };
       userInputs.shift();
     }
   };
