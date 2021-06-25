@@ -1,3 +1,5 @@
+'use strict';
+
 //[HTML ELEMENTS]
 const frmSignIn = document.getElementById('frmSignIn');
 const txtName = document.getElementById('txtName');

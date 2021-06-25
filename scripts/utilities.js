@@ -1,3 +1,5 @@
+'use strict';
+
 const arrayEquals = (a, b) => {
   return (
     Array.isArray(a) &&

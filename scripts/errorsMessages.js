@@ -1,3 +1,5 @@
+'use strict';
+
 const errorMessages = new Map();
 errorMessages['txtName'] = document.getElementById('msgName');
 errorMessages['txtLastName'] = document.getElementById('msgLastName');

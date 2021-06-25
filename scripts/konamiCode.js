@@ -1,12 +1,14 @@
+'use strict';
+
 import { arrayEquals } from './utilities.js';
 
 (function () {
 
   //[VARIABLES]
   let userInputs = [];
-  let konamiCode = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a']; //[↑↑↓↓←→←→ba]
-  let customCode = ['h', 'a', 'x', '1', '2', '3', 'x', 'd', 'd', 'd']; //[hax123xddd]
-  let ignoreKeys = ['Shift','CapsLock', 'NumLock'];
+  const konamiCode = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a']; //[↑↑↓↓←→←→ba]
+  const customCode = ['h', 'a', 'x', '1', '2', '3', 'x', 'd', 'd', 'd']; //[hax123xddd]
+  const ignoreKeys = ['Shift','CapsLock', 'NumLock'];
 
   //[HTML ELEMENTS]
   const backgroundShadow = document.getElementById('backgroundShadow');
