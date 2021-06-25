@@ -1,10 +1,11 @@
 'use strict';
-import { strongPassword, isValidName, onlyNumbers, isPhoneNumber, isValidEmail, isvalidUrl } from './regexs.js';
 import './konamiCode.js';
 import './htmlElements.js';
+import { errorMessages } from './errorsMessages.js';
+import { checkValidName, checkValidLastName, checkValidAge, checkPhone, checkUrl, checkEmail, checkPassword, checkPasswordMatch } from './validations.js';
 
 //[VARIABLES]
-let showPassword = false;
+let showPassword = true;
 
 //[EVENTS]
 btnSignin.addEventListener('click', e => {
@@ -17,6 +18,7 @@ rgnExperience.addEventListener('change', e => {
 });
 
 btnShowPassword.addEventListener('click', function () {
+  let passwordInputs = document.getElementsByClassName('show-item');
   if (showPassword) {
     this.classList.add('show-password__active');
     for (let input of passwordInputs) input.type = 'text';
@@ -30,10 +32,8 @@ btnShowPassword.addEventListener('click', function () {
 
 //[FUNCTIONS]
 
-/*FORM FUNCTIONS*/
 const validateForm = () => {
   let errors = [];
-
   errors.push(validateName());
   errors.push(validateLastName());
   errors.push(validateAge());
@@ -53,131 +53,21 @@ const validateForm = () => {
   showSubmittedData();
 };
 
-const validateName = () => {
-  if (!txtName.value) {
-    showWarning(txtName, msgName, 'You must provide a name.');
-    return false;
-  }
+const validateName = () => handleError(checkValidName(txtName.value), txtName);
 
-  if (!isValidName.test(txtName.value)) {
-    showWarning(txtName, msgName, 'The name must only contain letters.');
-    return false;
-  }
+const validateLastName = () => handleError(checkValidLastName(txtLastName.value), txtLastName);
 
-  clearWarning(txtName, msgName);
-  return true;
-};
+const validateAge = () => handleError(checkValidAge(txtAge.value), txtAge);
 
-const validateLastName = () => {
-  if (!txtLastName.value) {
-    showWarning(txtLastName, msgLastName, 'You must provide a lastname.');
-    return false;
-  }
+const validatePhone = () => handleError(checkPhone(txtPhone.value), txtPhone);
 
-  if (!isValidName.test(txtLastName.value)) {
-    showWarning(txtLastName, msgLastName, 'The lastname must only contain letters.');
-    return false;
-  }
+const validateWebSite = () => handleError(checkUrl(txtWebSite.value), txtWebSite);
 
-  clearWarning(txtLastName, msgLastName);
-  return true;
-};
+const validateEmail = () => handleError(checkEmail(txtEmail.value), txtEmail);
 
-const validateAge = () => {
-  if (!txtAge.value) {
-    showWarning(txtAge, msgAge, 'You must provide an age.');
-    return false;
-  }
+const validatePassword1 = () => handleError(checkPassword(txtPassword.value), txtPassword);
 
-  if (!(txtAge.value >= 18 && txtAge.value <= 40)) {
-    showWarning(txtAge, msgAge, 'Age has to be between 18 and 40.');
-    return false;
-  }
-
-  if (!onlyNumbers.test(txtAge.value)) {
-    showWarning(txtAge, msgAge, 'Invalid age.');
-    return false;
-  }
-
-  clearWarning(txtAge, msgAge);
-  return true;
-};
-
-const validatePhone = () => {
-  if (!txtPhone.value) {
-    showWarning(txtPhone, msgPhone, 'You must provide a phone.');
-    return false;
-  }
-
-  if (!isPhoneNumber.test(txtPhone.value)) {
-    showWarning(txtPhone, msgPhone, 'You must provide a valid phone.');
-    return false;
-  }
-
-  clearWarning(txtPhone, msgPhone);
-  return true;
-};
-
-const validateWebSite = () => {
-  if (!txtWebSite.value) {
-    showWarning(txtWebSite, msgWebSite, 'You must provide an URL.');
-    return false;
-  }
-
-  if (!isvalidUrl.test(txtWebSite.value)) {
-    showWarning(txtWebSite, msgWebSite, 'You must provide a valid URL.');
-    return false;
-  }
-
-  clearWarning(txtWebSite, msgWebSite);
-  return true;
-};
-
-const validateEmail = () => {
-  if (!txtEmail.value) {
-    showWarning(txtEmail, msgEmail, 'You must provide an email.');
-    return false;
-  }
-
-  if (!isValidEmail.test(txtEmail.value)) {
-    showWarning(txtEmail, msgEmail, 'You must provide a valid email.');
-    return false;
-  }
-
-  clearWarning(txtEmail, msgEmail);
-  return true;
-};
-
-const validatePassword1 = () => {
-  if (!txtPassword.value) {
-    showWarning(txtPassword, msgPassword, 'You must provide a password.');
-    return false;
-  }
-
-  if (!strongPassword.test(txtPassword.value)) {
-    showWarning(txtPassword, msgPassword, 'The password must contain at least 1 lowercase character, 1 uppercase caracter, 1 numeric character and must be 8 characters or longer.');
-    return false;
-  }
-
-  strongPassword;
-
-  clearWarning(txtPassword, msgPassword);
-  return true;
-};
-
-const validatePassword2 = () => {
-  if (!txtRepeatPassword.value) {
-    showWarning(txtRepeatPassword, msgRepeatPassword, 'You must repeat the password.');
-    return false;
-  }
-
-  if (txtPassword.value !== txtRepeatPassword.value) {
-    showWarning(txtRepeatPassword, msgRepeatPassword, 'Password doesn\'t match.');
-    return false;
-  }
-  clearWarning(txtRepeatPassword, msgRepeatPassword);
-  return true;
-};
+const validatePassword2 = () => handleError(checkPasswordMatch(txtPassword.value, txtPassword2.value), txtPassword2);
 
 const agreeTerms = () => {
   if (!chkTerms.checked) {
@@ -205,18 +95,19 @@ const showSubmittedData = () => {
   });
 };
 
-const clearWarning = (input, message) => {
-  message.textContent = '';
-  message.classList.add('d-none');
-  input.classList.remove('invalid-input');
-};
+const handleError = (response, element) => {
+  if(response.success){
+    errorMessages[element.id].textContent = '';
+    errorMessages[element.id].classList.add('d-none');
+    element.classList.remove('invalid-input');
+    return true;
+  }
 
-const showWarning = (input, message, text) => {
-  message.textContent = text;
-  message.classList.remove('d-none');
-  input.classList.add('invalid-input');
-};
+  errorMessages[element.id].textContent = response.message;
+  errorMessages[element.id].classList.remove('d-none');
+  element.classList.add('invalid-input');
+  return false;
+}
 
 //[SETTINGS]
 frmSignIn.reset();
-loadElements();

@@ -1,4 +1,4 @@
-//[UTILITIES]
+//[FUNCTIONS]
 const arrayEquals = (a, b) => {
   return (
     Array.isArray(a) &&
