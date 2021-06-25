@@ -6,8 +6,8 @@ https://week1-liard.vercel.app/
 ### Note: To activate the _konami code easter egg_, press the following _keys_:
 #
 ```
-↑↑↓↓←→←→ba 
+↑ ↑ ↓ ↓ ← → ← → b a 
 ```
 ```
-hax123xddd 
+h a x 1 2 3 x d d d  
 ```
