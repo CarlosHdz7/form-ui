@@ -1,5 +1,5 @@
-//[HTML OBJECTS]
-const loadElements = () => {
+(function () {
+  //[HTML ELEMENTS]
   const frmSignIn = document.getElementById('frmSignIn');
   const txtName = document.getElementById('txtName');
   const txtLastName = document.getElementById('txtLastName');
@@ -24,6 +24,4 @@ const loadElements = () => {
   const msgTerms = document.getElementById('msgTerms');
   const btnShowPassword = document.getElementById('btnShowPassword');
   const passwordInputs = document.getElementsByClassName('show-item');
-}
-
-export { loadElements }
+})();

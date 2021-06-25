@@ -1,7 +1,7 @@
 'use strict';
-import './konamiCode.js';
 import { strongPassword, isValidName, onlyNumbers, isPhoneNumber, isValidEmail, isvalidUrl } from './regexs.js';
-import { loadElements } from './htmlElements.js';
+import './konamiCode.js';
+import './htmlElements.js';
 
 //[VARIABLES]
 let showPassword = false;
