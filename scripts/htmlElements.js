@@ -22,8 +22,6 @@ const loadElements = () => {
   const msgPassword = document.getElementById('msgPassword');
   const msgRepeatPassword = document.getElementById('msgRepeatPassword');
   const msgTerms = document.getElementById('msgTerms');
-  const backgroundShadow = document.getElementById('backgroundShadow');
-  const gif = document.getElementById('gif');
   const btnShowPassword = document.getElementById('btnShowPassword');
   const passwordInputs = document.getElementsByClassName('show-item');
 }
