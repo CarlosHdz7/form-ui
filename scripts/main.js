@@ -28,6 +28,7 @@ rgnExperience.addEventListener('change', e => {
 });
 
 btnShowPassword.addEventListener('click', e => {
+  const passwordInputs = document.getElementsByClassName('show-item');
   if (showPassword) {
     for (let input of passwordInputs) { input.type = 'text'; }
     e.target.classList.add('show-password__active');
