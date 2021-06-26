@@ -1,7 +1,7 @@
 # Deployed Project
 ### The project was deployed using vercel.
 
-https://week1-liard.vercel.app/
+https://week1-liard.vercel.app/ or http://www.carloshdz.com
 
 ### Note: To activate the _konami code easter egg_, press the following _keys_:
 #
