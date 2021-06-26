@@ -1,5 +1,7 @@
 'use strict';
 
+import './konamiCode.js';
+import './htmlElements.js';
 import {
   checkValidName,
   checkValidLastName,
@@ -11,8 +13,6 @@ import {
   checkPasswordMatch,
 } from './validations.js';
 import { errorMessages } from './errorsMessages.js';
-import './konamiCode.js';
-import './htmlElements.js';
 
 //[VARIABLES]
 let showPassword = true;
