@@ -103,6 +103,11 @@ body{
     font-size: 10px;
 }
 
+.input-container__message-fix{
+    display: block;
+    margin-top: 3px;
+}
+
 .range-container{
     display: flex;
     align-items: center;
@@ -204,6 +209,10 @@ body{
 .show-password__active{
     background-color: var(--gray2);
     border-radius: 3px;
+}
+
+.d-block{
+    display: block;
 }
 
 @media (max-width: 800px) {
