@@ -39,7 +39,7 @@ const checkValidLastName = text => {
   }
 
   if (!isValidName.test(text)) {
-    response.message = 'The lastname must must start with capital letter and only contain letters.';
+    response.message = 'The lastname must start with capital letter and only contain letters.';
     response.success = false;
     return response;
   }
